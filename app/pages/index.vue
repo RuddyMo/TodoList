@@ -14,7 +14,7 @@ import { Fingerprint } from "lucide-vue-next"
 <template>
     <div class=''>
     <Card>
-        <CardHeader class='flex flex-row gap-14 justify-between items-center'>
+        <CardHeader class='flex flex-row justify-between items-center border-b text-gray-400'>
         <div>
             <CardTitle>Todo App</CardTitle>
             <CardDescription class='whitespace-nowrap'>Organize your tasks and boost your productivity.</CardDescription>

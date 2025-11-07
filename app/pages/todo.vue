@@ -13,19 +13,21 @@
         </DropdownMenu>
         </CardHeader>
         <div class='flex items-center gap-2'>
-            <Input id="add" type="text" placeholder="Add a new task" v-model='task' />
+            <Input v-model='task' id="add" type="text" placeholder="Add a new task" />
             <Button @click='addTask' size="icon" class='cursor-pointer'>
                 <Plus class="w-4 h-4" />
             </Button>
         </div>
         <ul class='divide-y divide-gray-200 dark:divide-gray-800'>
             <li v-for="(task, i) in taskList" :key="i" class='flex items-center justify-between py-2'>
-            <span>{{ task }}</span>
+            <span class="flex-1 font-medium" :class="[task.completed ? 'line-through text-gray-500' : '']">
+                {{ task.title }}
+            </span>
             <div class='flex justify-center items-center gap-5'>
-                <Switch id="airplane-mode" />
-                <Button size="icon" class='p-1 h-8 w-8 text-red-500 bg-red-100 hover:bg-red-200 hover:text-red-500 cursor-pointer' @click="removeTask(i)">
+                <Switch v-model="task.completed"/>
+                <button size="icon" class='p-1 h-6 w-6 text-red-500 bg-red-100 hover:bg-red-200 hover:text-red-500 cursor-pointer rounded-sm flex justify-center items-center' @click="removeTask(i)">
                     <X class="w-3 h-3" />
-                </Button>
+                </button>
             </div>
             </li>
         </ul>
@@ -34,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,16 +50,25 @@ import { Switch } from "@/components/ui/switch"
 import { Input } from "@/components/ui/input"
 import { Plus, X } from 'lucide-vue-next';
 
+type Task = {
+    id: number
+    title: string;
+    completed: boolean;
+}
+
 const task = ref<string>("")
-const taskList = ref<string[]>([])
+const taskList = ref<Task[]>([])
 
 const addTask = () => {
     if (task.value.trim() === "") return
-    taskList.value.push(task.value)
+    taskList.value.push({
+        id: Date.now(),
+        title: task.value,
+        completed: false
+    })
     task.value = ""
     console.log("Task added")
 }
-
 const removeTask = (index: number) => {
     taskList.value.splice(index, 1)
 }

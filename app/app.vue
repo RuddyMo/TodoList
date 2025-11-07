@@ -2,7 +2,8 @@
   <div class="min-h-screen flex flex-col justify-center max-w-2xl mx-auto">
     <div class='mb-2 text-right'>
       <button class='cursor-pointer p-2'>
-        <Sun class="w-4 h-4" />
+        <Sun v-if='colorMode.value === "light"' @click="colorMode.preference = 'dark'" class="w-4 h-4" />
+        <Moon v-if='colorMode.value === "dark"' @click="colorMode.preference = 'light'" class="w-4 h-4" />
       </button>
     </div>
     <NuxtPage />
@@ -13,10 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Sun } from "lucide-vue-next"
+import { Sun, Moon } from "lucide-vue-next"
 
+const colorMode = useColorMode()
 </script>
-
-<style>
-
-</style>

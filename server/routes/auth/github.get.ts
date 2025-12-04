@@ -1,0 +1,9 @@
+export default defineOAuthGitHubEventHandler({
+  async onSuccess(event, { user }) {
+    await setUserSession(event, { user });
+    return sendRedirect(event, '/todos');
+  },
+});
+
+const config = useRuntimeConfig();
+console.log('CLIENT ID UTILISÉ PAR NUXT :', config.oauth.github.clientId);

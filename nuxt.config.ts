@@ -3,13 +3,28 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  build: {
+    transpile: ['lucide-vue-next'],
+  },
+
   runtimeConfig: {
+    oauth: {
+      github: {
+        clientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET,
+      },
+    },
     public: {
-      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
-      supabaseAnonKey: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY,
+      supabaseUrl: process.env.NUXT_SUPABASE_URL,
+      supabaseAnonKey: process.env.NUXT_SUPABASE_ANON_KEY,
     },
   },
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/color-mode'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'shadcn-nuxt',
+    '@nuxtjs/color-mode',
+    'nuxt-auth-utils',
+  ],
 
   colorMode: {
     classSuffix: '',

@@ -6,4 +6,3 @@ export default defineOAuthGitHubEventHandler({
 });
 
 const config = useRuntimeConfig();
-console.log('CLIENT ID UTILISÉ PAR NUXT :', config.oauth.github.clientId);

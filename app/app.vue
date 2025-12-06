@@ -65,11 +65,10 @@ import { Sun, Moon, LogOutIcon } from 'lucide-vue-next';
 import { Fingerprint } from 'lucide-vue-next';
 import type { User } from '../types/auth';
 
-const { loggedIn, user, clear, openInPopup } = useUserSession() as {
+const { loggedIn, user, clear } = useUserSession() as {
   loggedIn: Ref<boolean>;
   user: Ref<User | null>;
   clear: () => void;
-  openInPopup: (url: string) => void;
 };
 
 const items = [

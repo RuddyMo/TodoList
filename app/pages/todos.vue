@@ -41,12 +41,13 @@ definePageMeta({
 });
 
 interface Task {
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
 }
 
 const { user } = useUserSession();
+
 
 const task = ref<string>('');
 const taskList = ref<Task[]>([]);
@@ -70,16 +71,13 @@ const fetchTasks = async () => {
 const addTask = async () => {
   if (task.value.trim() === '') return;
 
-  const newTask = {
-    title: task.value,
-    completed: false,
-  };
-
   const { data, error } = await $supabase
     .from('todos')
-    .insert(newTask)
+    .insert({
+      title: task.value,
+      completed: false,
+    })
     .select();
-
   if (error) {
     console.error('Erreur Supabase:', error.message);
     return;

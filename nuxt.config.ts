@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    supabaseServiceRoleKey: process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY,
     oauth: {
       github: {
         clientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
